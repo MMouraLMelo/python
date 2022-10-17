@@ -57,9 +57,9 @@ for tabela_nome in TABLES:
 # inserindo usuarios
 usuario_sql = 'INSERT INTO usuarios (nome, nickname, senha) VALUES (%s, %s, %s)'
 usuarios = [
-      ("Marcel Melo", "MMouraMelo", "M@rcel1987"),
-      ("Aline Moura", "Alinemlm", "alinemlm"),
-      ("Agnes Moura", "Agnesmlm", "agnesmlm")
+      ("Bruno Divino", "BD", "alohomora"),
+      ("Camila Ferreira", "Mila", "paozinho"),
+      ("Guilherme Louro", "Cake", "python_eh_vida")
 ]
 cursor.executemany(usuario_sql, usuarios)
 

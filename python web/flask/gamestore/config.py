@@ -1,3 +1,5 @@
+import os
+
 SECRET_KEY = 'Parangaricotirimirruaro'
 
 SQLALCHEMY_DATABASE_URI = \
@@ -5,6 +7,8 @@ SQLALCHEMY_DATABASE_URI = \
         SGBD='mysql+mysqlconnector',
         usuario='root',
         senha='Marcel1987',
-        servidor='127.0.0.1',
+        servidor='localhost',
         database='jogoteca'
     )
+
+UPLOAD_PATH = os.path.dirname(os.path.abspath(__file__)) + '/uploads'
