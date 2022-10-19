@@ -3,6 +3,7 @@ from gamestore import app, db
 from models import Jogos, Usuarios
 from helpers import recupera_imagem, deleta_arquivo, FormularioJogo, FormularioUsusario
 import time
+from flask_bcrypt import check_password_hash
 
 @app.route('/')
 def index():
@@ -98,12 +99,12 @@ def login():
 def autenticar():
     form = FormularioUsusario(request.form)
     usuario = Usuarios.query.filter_by(nickname=form.nickname.data).first()
-    if usuario:
-        if form.senha.data == usuario.senha:
-            session['usuario_logado'] = usuario.nickname
-            flash(usuario.nickname + ' logado com sucesso!')
-            proxima_pagina = request.form['proxima']
-            return redirect(proxima_pagina)
+    senha = check_password_hash(usuario.senha, form.senha.data)
+    if usuario and senha:
+        session['usuario_logado'] = usuario.nickname
+        flash(usuario.nickname + ' logado com sucesso!')
+        proxima_pagina = request.form['proxima']
+        return redirect(proxima_pagina)
     else:
         flash('Usuário não logado.')
         return redirect(url_for('login'))
